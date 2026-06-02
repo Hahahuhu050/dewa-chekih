@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Score Cekih by Sadewa Corp</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <link rel="icon" type="image/png" sizes="192x192" href="cekih-icon-192.png">
+    <link rel="apple-touch-icon" sizes="192x192" href="cekih-icon-192.png">
+</head>
+<body class="dark-theme">
+
+    <div id="setup-screen" class="screen active">
+        <header class="app-header">
+            <div class="logo-wrapper">
+                <img src="cekih-icon-512.png" alt="Cekih Logo" class="app-logo-top">
+            </div>
+            <p class="subtitle">by Sadewa Corp</p>
+        </header>
+        <main class="card-container">
+            <div class="card">
+                <h2>Setup Pemain</h2>
+                <div class="input-group">
+                    <label for="playerA">Nama Pemain A</label>
+                    <input type="text" id="playerA" placeholder="Ketik nama Pemain A...">
+                </div>
+                <div class="input-group">
+                    <label for="playerB">Nama Pemain B</label>
+                    <input type="text" id="playerB" placeholder="Ketik nama Pemain B...">
+                </div>
+                <div class="input-group">
+                    <label for="playerC">Nama Pemain C</label>
+                    <input type="text" id="playerC" placeholder="Ketik nama Pemain C...">
+                </div>
+                <div class="input-group">
+                    <label for="playerD">Nama Pemain D</label>
+                    <input type="text" id="playerD" placeholder="Ketik nama Pemain D...">
+                </div>
+            </div>
+
+            <div class="card">
+                <h2>Target Kemenangan</h2>
+                <div class="target-options">
+                    <button type="button" class="btn-target" data-value="500">500</button>
+                    <button type="button" class="btn-target" data-value="750">750</button>
+                    <button type="button" class="btn-target active" data-value="1000">1000</button>
+                    <button type="button" class="btn-target" data-value="1500">1500</button>
+                </div>
+                <div class="input-group custom-target-group">
+                    <label for="customTarget">Target Kustom</label>
+                    <input type="number" id="customTarget" placeholder="Masukkan angka lain">
+                </div>
+            </div>
+
+            <button id="btn-start" class="btn-primary">MULAI PERMAINAN</button>
+        </main>
+    </div>
+
+    <div id="game-screen" class="screen">
+        <header class="game-header">
+            <div>
+                <h1 id="display-round">Ronde 1</h1>
+                <p id="display-target-info">Target: 1000</p>
+            </div>
+            <div class="utility-buttons">
+                <button id="btn-reset-game" class="btn-danger-circle" title="Reset Total Game">🔄</button>
+                <button id="btn-theme" title="Ganti Tema">🌓</button>
+                <button id="btn-fullscreen" title="Fullscreen">📺</button>
+                <button id="btn-screenshot" title="Screenshot">📸</button>
+            </div>
+        </header>
+
+        <nav class="tab-bar">
+            <button class="tab-btn active" data-tab="tab-ranking">Ranking</button>
+            <button class="tab-btn" data-tab="tab-history">History</button>
+            <button class="tab-btn" data-tab="tab-achievement">Achievement</button>
+            <button class="tab-btn" data-tab="tab-statistik">Statistik</button>
+        </nav>
+
+        <main id="game-capture-area" class="tab-content-container">
+            
+            <section id="tab-ranking" class="tab-content active">
+                <div class="ranking-list" id="ranking-container"></div>
+
+                <div class="card scoring-card">
+                    <h3>Input Skor Ronde Ini</h3>
+                    <div class="score-inputs-grid">
+                        <div class="input-score-block">
+                            <label id="lbl-scoreA" for="input-scoreA">A</label>
+                            <input type="number" id="input-scoreA" placeholder="0" pattern="[0-9-]*">
+                        </div>
+                        <div class="input-score-block">
+                            <label id="lbl-scoreB" for="input-scoreB">B</label>
+                            <input type="number" id="input-scoreB" placeholder="0" pattern="[0-9-]*">
+                        </div>
+                        <div class="input-score-block">
+                            <label id="lbl-scoreC" for="input-scoreC">C</label>
+                            <input type="number" id="input-scoreC" placeholder="0" pattern="[0-9-]*">
+                        </div>
+                        <div class="input-score-block">
+                            <label id="lbl-scoreD" for="input-scoreD">D</label>
+                            <input type="number" id="input-scoreD" placeholder="0" pattern="[0-9-]*">
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="tab-history" class="tab-content">
+                <div class="card">
+                    <h3>Log Aktivitas Permainan</h3>
+                    <div class="history-list" id="history-container"></div>
+                </div>
+            </section>
+
+            <section id="tab-achievement" class="tab-content">
+                <div id="achievement-container" class="achievement-grid"></div>
+            </section>
+
+            <section id="tab-statistik" class="tab-content">
+                <div class="card table-responsive">
+                    <div class="table-header-flex">
+                        <h3>Statistik & Edit Nama</h3>
+                        <span class="hint-text">*Ketik langsung di kolom nama untuk mengubah</span>
+                    </div>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nama Pemain</th>
+                                <th>Skor</th>
+                                <th>Tertinggi</th>
+                                <th>⭐</th>
+                                <th>Bakar</th>
+                                <th>Terbakar</th>
+                                <th>3x Bakar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="statistik-table-body"></tbody>
+                    </table>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="action-footer">
+            <button id="btn-undo" class="btn-secondary">Undo</button>
+            <button id="btn-save-round" class="btn-primary">Simpan Ronde</button>
+            <button id="btn-next-round" class="btn-accent">Next Ronde</button>
+        </footer>
+    </div>
+
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('sw.js')
+                    .then(reg => console.log('SW Registered', reg.scope))
+                    .catch(err => console.error('SW Failed', err));
+            });
+        }
+    </script>
+    <script src="app.js"></script>
+</body>
+</html>
